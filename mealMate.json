@@ -1,0 +1,163 @@
+[
+    {
+      "id": 1,
+      "name": "Spaghetti Bolognese",
+      "description": "Classic Italian pasta with a rich meat sauce.",
+      "price": 12.99,
+      "tags": "Italian",
+      "image": "https://th.bing.com/th?id=OSK.ba5452c36e316e275fa30785d4431a44&w=194&h=145&rs=2&qlt=80&o=6&cdv=1&dpr=1.1&pid=16.1"
+    },
+    {
+      "id": 2,
+      "name": "Vegetarian Pizza",
+      "description": "Crispy thin crust loaded with fresh veggies and cheese.",
+      "price": 10.99,
+      "tags": "Vegetarian",
+      "image": "https://th.bing.com/th?id=OSK.fbdf1dd228cb79b2d27077d38fe90271&w=223&h=334&rs=2&qlt=80&o=6&cdv=1&dpr=1.1&pid=16.1"
+    },
+    {
+      "id": 3,
+      "name": "Chicken Curry",
+      "description": "Tender chicken cooked in a spicy curry sauce.",
+      "price": 15.49,
+      "tags": "Indian",
+      "image": "https://th.bing.com/th?id=OSK.841b8f0585f6a8595c777542e1bb0d45&w=223&h=334&rs=2&qlt=80&o=6&cdv=1&dpr=1.1&pid=16.1"
+    },
+    {
+      "id": 4,
+      "name": "Sushi Platter",
+      "description": "Assorted sushi rolls served with soy sauce and wasabi.",
+      "price": 25.00,
+      "tags": "Japanese",
+      "image": "https://th.bing.com/th?id=OIP.KVfQGEpH208vE-ZYd_WJZAHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.1&pid=3.1&rm=2"
+    },
+    {
+      "id": 5,
+      "name": "Caesar Salad",
+      "description": "Crisp romaine lettuce tossed with Caesar dressing, croutons, and parmesan.",
+      "price": 9.99,
+      "tags": "Healthy",
+      "image": "https://images8.alphacoders.com/103/1032061.jpg"
+    },
+    {
+      "id": 6,
+      "name": "BBQ Ribs",
+      "description": "Smoked ribs glazed with tangy barbecue sauce.",
+      "price": 18.99,
+      "tags": "American",
+      "image": "https://th.bing.com/th?id=OSK.6603551528ba4a5aaf3f57b0d3fc5085&w=223&h=334&rs=2&qlt=80&o=6&cdv=1&dpr=1.1&pid=16.1"
+    },
+    {
+      "id": 7,
+      "name": "Pad Thai",
+      "description": "Stir-fried rice noodles with shrimp, tofu, and a savory-sweet sauce.",
+      "price": 13.99,
+      "tags": "Thai",
+      "image": "https://th.bing.com/th?id=OSK.f1eb23c18cddf9db91796cf96f83def0&w=223&h=312&rs=2&qlt=80&o=6&cdv=1&dpr=1.1&pid=16.1"
+    },
+    {
+      "id": 8,
+      "name": "Grilled Salmon",
+      "description": "Fresh salmon fillet grilled to perfection with a side of veggies.",
+      "price": 20.99,
+      "tags": "Seafood",
+      "image": "https://th.bing.com/th?id=OSK.a7b624df6fac273984e6478d6c35dc83&w=223&h=334&rs=2&qlt=80&o=6&cdv=1&dpr=1.1&pid=16.1"
+    },
+    {
+      "id": 9,
+      "name": "Beef Tacos",
+      "description": "Soft tacos filled with seasoned beef, lettuce, and cheese.",
+      "price": 8.99,
+      "tags": "Mexican",
+      "image": "https://th.bing.com/th?id=OSK.fd1a6d033cd42614afa735079e5fd17f&w=223&h=278&rs=2&qlt=80&o=6&cdv=1&dpr=1.1&pid=16.1"
+    },
+    {
+      "id": 10,
+      "name": "Vegetable Stir Fry",
+      "description": "Mixed vegetables stir-fried in a savory soy sauce.",
+      "price": 11.49,
+      "tags": "Vegan",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 11,
+      "name": "Chicken Alfredo",
+      "description": "Creamy Alfredo sauce served over fettuccine pasta and grilled chicken.",
+      "price": 14.99,
+      "tags": "Italian",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 12,
+      "name": "Margherita Pizza",
+      "description": "Simple and fresh with mozzarella, basil, and tomato sauce.",
+      "price": 9.99,
+      "tags": "Vegetarian",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 13,
+      "name": "Beef Burger",
+      "description": "Juicy beef patty served in a bun with toppings of your choice.",
+      "price": 7.99,
+      "tags": "American",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 14,
+      "name": "Chicken Tikka Masala",
+      "description": "Grilled chicken in a creamy spiced tomato curry.",
+      "price": 16.99,
+      "tags": "Indian",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 15,
+      "name": "Shrimp Scampi",
+      "description": "Succulent shrimp cooked in garlic butter served over pasta.",
+      "price": 19.99,
+      "tags": "Seafood",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 16,
+      "name": "Falafel Wrap",
+      "description": "Crispy falafel wrapped in a pita with fresh veggies and tahini.",
+      "price": 9.49,
+      "tags": "Middle Eastern",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 17,
+      "name": "French Onion Soup",
+      "description": "Rich onion soup topped with melted cheese and croutons.",
+      "price": 8.49,
+      "tags": "French",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 18,
+      "name": "Fish and Chips",
+      "description": "Crispy fried fish served with golden fries and tartar sauce.",
+      "price": 12.49,
+      "tags": "British",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 19,
+      "name": "Greek Salad",
+      "description": "Fresh vegetables, feta cheese, and olives with olive oil dressing.",
+      "price": 10.49,
+      "tags": "Healthy",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": 20,
+      "name": "Teriyaki Chicken Bowl",
+      "description": "Grilled chicken glazed with teriyaki sauce over rice.",
+      "price": 12.99,
+      "tags": "Asian",
+      "image": "https://via.placeholder.com/300"
+    }
+  ]
+  

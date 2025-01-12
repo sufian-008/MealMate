@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup/Login - MealMate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function toggleForm(type) {
+      const buyerForm = document.getElementById("buyer-form");
+      const sellerForm = document.getElementById("seller-form");
+      const buyerButton = document.getElementById("buyer");
+      const sellerButton = document.getElementById("seller");
+
+      if (type === "buyer") {
+        buyerForm.classList.remove("hidden");
+        sellerForm.classList.add("hidden");
+
+        buyerButton.classList.remove("bg-gray-200", "text-gray-800", "hover:bg-gray-300");
+        buyerButton.classList.add("bg-orange-500", "text-white", "hover:bg-orange-600");
+
+        sellerButton.classList.remove("bg-orange-500", "text-white", "hover:bg-orange-600");
+        sellerButton.classList.add("bg-gray-200", "text-gray-800", "hover:bg-gray-300");
+      } else {
+        sellerForm.classList.remove("hidden");
+        buyerForm.classList.add("hidden");
+
+        sellerButton.classList.remove("bg-gray-200", "text-gray-800", "hover:bg-gray-300");
+        sellerButton.classList.add("bg-orange-500", "text-white", "hover:bg-orange-600");
+
+        buyerButton.classList.remove("bg-orange-500", "text-white", "hover:bg-orange-600");
+        buyerButton.classList.add("bg-gray-200", "text-gray-800", "hover:bg-gray-300");
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50">
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-lg w-full max-w-3xl p-8">
+      <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Sign Up</h1>
+
+      <div class="mb-4 text-right">
+        <a href="HomePage.html" class="text-orange-500 hover:text-orange-600">
+          <button class="px-6 py-2 bg-gray-200 text-gray-800 rounded-full font-semibold shadow hover:bg-gray-300">
+            Back to Home
+          </button>
+        </a>
+      </div>
+
+      <div class="flex justify-center space-x-4 mb-8">
+        <button onclick="toggleForm('buyer')" id="buyer" class="px-6 py-2 bg-orange-500 text-white rounded-full font-semibold shadow hover:bg-orange-600">
+          Buyer
+        </button>
+        <button onclick="toggleForm('seller')" id="seller" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-full font-semibold shadow hover:bg-gray-300">
+          Seller
+        </button>
+      </div>
+
+      <!-- Buyer Form -->
+      <form id="buyer-form" class="space-y-6" method="POST" action="signup_handler.php">
+        <input type="hidden" name="role" value="buyer">
+        <h2 class="text-lg font-semibold text-gray-700">Buyer Signup</h2>
+        <div class="space-y-4">
+          <input type="text" name="fullName" id="buyer-full-name" placeholder="Full Name" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="email" name="email" id="buyer-email" placeholder="Email Address" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="password" name="password" id="buyer-password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="tel" name="phoneNumber" id="buyer-phone" placeholder="Phone Number" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="text" name="address" id="buyer-address" placeholder="Address" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+        </div>
+        <button type="submit" class="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+          Sign Up as Buyer
+        </button>
+      </form>
+
+      <!-- Seller Form -->
+      <form id="seller-form" class="space-y-6 hidden" method="POST" action="signup_handler.php">
+        <input type="hidden" name="role" value="seller">
+        <h2 class="text-lg font-semibold text-gray-700">Seller Signup</h2>
+        <div class="space-y-4">
+          <input type="text" name="fullName" id="seller-full-name" placeholder="Full Name" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="email" name="email" id="seller-email" placeholder="Email Address" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="password" name="password" id="seller-password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="tel" name="phoneNumber" id="seller-phone" placeholder="Phone Number" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="text" name="foodCategory" id="seller-food-category" placeholder="Food Category" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <input type="text" name="paymentDetails" id="seller-payment-details" placeholder="Bank/Payment Details" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+        </div>
+        <button type="submit" class="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+          Sign Up as Seller
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

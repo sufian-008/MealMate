@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MealMate</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header section -->
+  <header class="bg-white shadow">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <!-- Logo and Home link -->
+      <a href="HomePage.html" class="text-orange-500 text-2xl font-bold">MealMate</a>
+      
+      <!-- Navigation menu for large screens -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="HomePage.html" class="text-gray-700 hover:text-orange-500">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-orange-500">About Us</a>
+        <a href="browse.html" class="text-gray-700 hover:text-orange-500">Browse Meals</a>
+        <a href="contact.html" class="text-gray-700 hover:text-orange-500">Contact</a>
+      </nav>
+      
+      <!-- Login and Sign Up buttons -->
+      <div class="space-x-4">
+        <a href="signUp.html" class="px-4 py-2 bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600">Log In</a>
+        <a href="Login.html" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg shadow hover:bg-gray-300">Sign Up</a>
+      </div>
+      
+      <!-- Mobile menu toggle -->
+      <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero section with call to action buttons -->
+  <section class="relative bg-gradient-to-r from-orange-500 to-orange-300 text-white">
+    <div class="container mx-auto flex flex-col lg:flex-row items-center py-20 px-4 lg:px-10">
+      <div class="w-full lg:w-1/2 text-center lg:text-left">
+        <!-- Headline and description -->
+        <h1 class="text-4xl lg:text-5xl font-bold mb-4">Meals Made Easy for the Bachelor Life!</h1>
+        <p class="text-lg mb-6">Discover affordable, delicious meals tailored for your busy lifestyle. Join MealMate today!</p>
+        <div class="space-x-4">
+          <!-- Sign Up buttons for Buyer and Seller -->
+          <a href="Login.html" class="px-6 py-3 bg-white text-orange-500 rounded-full font-semibold shadow-lg hover:bg-gray-100">Sign Up as Buyer</a>
+          <a href="Login.html" class="px-6 py-3 bg-orange-600 rounded-full font-semibold shadow-lg hover:bg-orange-700">Sign Up as Seller</a>
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2 mt-10 lg:mt-0">
+        <!-- Hero image -->
+        <img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food-2048x1366.jpg" alt="Delicious Meals" class="rounded-lg shadow-lg mx-auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Meals Section -->
+  <section class="py-16 bg-gray-100" id="featured-food">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Meals</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="food-container">
+        <!-- Meal cards will be dynamically injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="container mx-auto text-center">
+      <!-- Footer text -->
+      <p>&copy; 2024 MealMate. All rights reserved.</p>
+      
+      <!-- Footer links -->
+      <div class="mt-4 space-x-4">
+        <a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a>
+        <a href="#" class="text-gray-300 hover:text-white">Terms of Use</a>
+        <a href="#" class="text-gray-300 hover:text-white">Contact Us</a>
+      </div>
+      
+      <!-- Social Media Links -->
+      <div class="mt-4 space-x-4">
+        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i> Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script to fetch and display meals -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const mealsContainer = document.getElementById('food-container'); 
+
+      try {
+        // Fetching meal data from JSON file
+        const response = await fetch('mealMate.json');
+        const meals = await response.json();
+
+        // Check if there are meals
+        if (meals.length === 0) {
+          mealsContainer.innerHTML = '<p class="text-gray-600">No meals available at the moment.</p>';
+          return;
+        }
+
+        // Display meals dynamically
+        meals.forEach(meal => {
+          const mealCard = `
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+              <img src="${meal.image || 'default-image.jpg'}" alt="${meal.name}" class="w-full h-40 object-cover">
+              <div class="p-4">
+                <h3 class="text-lg font-semibold text-gray-800">${meal.name}</h3>
+                <p class="text-gray-600 mt-2">${meal.description}</p>
+                <p class="text-orange-500 font-bold mt-2">$${meal.price.toFixed(2)}</p>
+                <div class="mt-4">
+                  <span class="px-3 py-1 bg-orange-100 text-orange-500 rounded-full text-sm">${meal.tags || 'No Tags'}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          mealsContainer.innerHTML += mealCard;
+        });
+      } catch (error) {
+        // Error handling if the fetch fails
+        console.error('Error fetching meals:', error);
+        mealsContainer.innerHTML = '<p class="text-red-500">Failed to load meals. Please try again later.</p>';
+      }
+    });
+  </script>
+
+</body>
+</html>

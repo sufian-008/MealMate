@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Dashboard - MealMate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Main Container -->
+  <div class="min-h-screen flex">
+    <!-- Navigation Panel -->
+    <aside class="w-1/4 bg-gray-800 text-white p-4 space-y-6">
+      <h2 class="text-2xl font-bold mb-4">MealMate</h2>
+      <nav class="space-y-4">
+        <a href="HomePage.html" class="block px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">Home</a>
+        <a href="#browse" class="block px-4 py-2 hover:bg-gray-600 rounded">Browse Meals</a>
+        <a href="#orders" class="block px-4 py-2 hover:bg-gray-600 rounded">My Orders</a>
+        <a href="#cart" class="block px-4 py-2 hover:bg-gray-600 rounded">Cart</a>
+        <a href="#profile" class="block px-4 py-2 hover:bg-gray-600 rounded">Profile</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Meal Browsing Section -->
+      <section id="browse" class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">Browse Meals</h2>
+        <div id="meals-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </section>
+
+      <!-- Cart Section -->
+      <section id="cart" class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">Cart</h2>
+        <table class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
+          <thead>
+            <tr class="bg-gray-100 text-gray-800">
+              <th class="text-left px-4 py-2">Item</th>
+              <th class="text-center px-4 py-2">Quantity</th>
+              <th class="text-right px-4 py-2">Price</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items"></tbody>
+          <tfoot>
+            <tr class="bg-gray-100 font-bold">
+              <td class="px-4 py-2">Total</td>
+              <td id="cart-total-quantity" class="text-center px-4 py-2">0 Items</td>
+              <td id="cart-total-price" class="text-right px-4 py-2">$0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+        <button id="checkout-button" class="mt-4 px-6 py-3 bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600">
+          Checkout
+        </button>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const mealsContainer = document.getElementById('meals-container');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotalQuantity = document.getElementById('cart-total-quantity');
+    const cartTotalPrice = document.getElementById('cart-total-price');
+
+    let cart = [];
+
+    // Fetch meals from JSON
+    async function fetchMeals() {
+      const response = await fetch('mealMate.json'); // Ensure this file exists in the same directory
+      const meals = await response.json();
+      displayMeals(meals);
+    }
+
+    // Display meals dynamically
+    function displayMeals(meals) {
+      mealsContainer.innerHTML = meals.map(meal => `
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <img src="${meal.image}" alt="${meal.name}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-gray-800">${meal.name}</h3>
+            <p class="text-gray-600 mb-2">${meal.description}</p>
+            <div class="flex items-center justify-between">
+              <span class="text-orange-500 font-semibold">$${meal.price.toFixed(2)}</span>
+              <button onclick="addToCart(${meal.id}, '${meal.name}', ${meal.price})" 
+                      class="px-4 py-2 bg-orange-500 text-white rounded shadow hover:bg-orange-600">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Add to Cart
+    function addToCart(id, name, price) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity += 1;
+      } else {
+        cart.push({ id, name, price, quantity: 1 });
+      }
+      updateCart();
+    }
+
+    // Update Cart
+    function updateCart() {
+      cartItems.innerHTML = cart.map(item => `
+        <tr class="border-b">
+          <td class="px-4 py-2">${item.name}</td>
+          <td class="text-center px-4 py-2">${item.quantity}</td>
+          <td class="text-right px-4 py-2">$${(item.price * item.quantity).toFixed(2)}</td>
+        </tr>
+      `).join('');
+
+      const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      cartTotalQuantity.textContent = `${totalQuantity} Items`;
+      cartTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
+    }
+
+    // Initialize
+    fetchMeals();
+  </script>
+</body>
+</html>

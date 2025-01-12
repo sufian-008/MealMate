@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard - MealMate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Main Container -->
+  <div class="min-h-screen flex">
+    <!-- Navigation Panel -->
+    <aside class="w-1/4 bg-gray-800 text-white p-4 space-y-6">
+      <h2 class="text-2xl font-bold mb-4">MealMate</h2>
+      <nav class="space-y-4">
+        <a href="HomePage.html" class="block px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">Home</a>
+        <a href="#add-meal" class="block px-4 py-2 hover:bg-gray-600 rounded">Add New Meal</a>
+        <a href="#listings" class="block px-4 py-2 hover:bg-gray-600 rounded">My Listings</a>
+        <a href="#sales" class="block px-4 py-2 hover:bg-gray-600 rounded">Sales Performance</a>
+        <a href="#profile" class="block px-4 py-2 hover:bg-gray-600 rounded">Profile</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Add New Meal Page -->
+      <section id="add-meal" class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">Add New Meal</h2>
+        <form id="addMealForm" class="space-y-4 bg-white p-6 rounded-lg shadow-lg">
+          <input id="mealName" type="text" placeholder="Meal Name" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <textarea id="mealDescription" placeholder="Meal Description" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required></textarea>
+          <input id="mealPrice" type="number" placeholder="Price ($)" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          <label class="block">
+            <span class="text-gray-700">Image URL</span>
+            <input id="mealImageURL" type="text" placeholder="Enter Image URL" class="mt-1 block w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500" required>
+          </label>
+          <div>
+            <label class="text-gray-700 block mb-2">Tags:</label>
+            <select id="mealTags" class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500 focus:border-orange-500">
+              <option selected>Choose Cuisine Type</option>
+              <option>Vegan</option>
+              <option>Spicy</option>
+              <option>Gluten-Free</option>
+            </select>
+          </div>
+          <button type="submit" class="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600">
+            Add Meal
+          </button>
+        </form>
+      </section>
+
+      <!-- Listings Management -->
+      <section id="listings" class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">My Listings</h2>
+        <div id="mealListings" class="bg-white shadow-lg rounded-lg p-4 space-y-4">
+          <!-- Meal Listings will appear here dynamically -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const apiEndpoint = "mealMate.json";
+
+    // Function to handle form submission
+    document.getElementById('addMealForm').addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent default form submission
+
+      const mealName = document.getElementById('mealName').value;
+      const mealDescription = document.getElementById('mealDescription').value;
+      const mealPrice = parseFloat(document.getElementById('mealPrice').value).toFixed(2);
+      const mealTags = document.getElementById('mealTags').value;
+      const mealImageURL = document.getElementById('mealImageURL').value; // Get Image URL
+
+      if (!mealImageURL) {
+        alert('Please provide an image URL.');
+        return;
+      }
+
+      // Create meal data object
+      const mealData = {
+        name: mealName,
+        description: mealDescription,
+        price: mealPrice,
+        tags: mealTags,
+        image: mealImageURL, // Use the image URL directly
+      };
+
+      try {
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(mealData),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          alert('Meal added successfully!');
+          console.log(result);
+          displayMealListing(mealData); // Add meal to the listings section
+        } else {
+          alert('Error adding meal. Please try again.');
+          console.error(await response.text());
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error connecting to the API.');
+      }
+    });
+
+    // Function to display a meal listing dynamically
+    function displayMealListing(meal) {
+      const mealListings = document.getElementById('mealListings');
+      const listing = `
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-gray-800">${meal.name}</h3>
+            <p class="text-gray-600">${meal.description} | Price: $${meal.price}</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded shadow hover:bg-gray-300">Edit</button>
+            <button class="px-4 py-2 bg-red-500 text-white rounded shadow hover:bg-red-600">Delete</button>
+          </div>
+        </div>
+        <img src="${meal.image}" alt="${meal.name}" class="w-full mt-2 rounded-lg shadow-lg">
+      `;
+      mealListings.innerHTML += listing;
+    }
+  </script>
+
+</body>
+</html>
